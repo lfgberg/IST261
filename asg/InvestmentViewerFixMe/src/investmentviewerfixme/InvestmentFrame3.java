@@ -1,7 +1,6 @@
 package investmentviewerfixme;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -55,8 +54,15 @@ public class InvestmentFrame3 extends JFrame {
 
     private void createButton() {
         button = new JButton("Add Interest");
-        ActionListener listener = null;
-        button.addActionListener(listener);
+        
+        // fixes broken button logic by adding a listener w/ a lambda
+        button.addActionListener((ActionEvent e) -> {
+            //  take the current balance and add interest based on the inputted rate
+            balance = balance + (balance * Double.parseDouble(rateField.getText()) / 100);
+            
+            //  update the text field
+            resultArea.append(balance + "\n");
+        });
     }
 
     private void createPanel() {
