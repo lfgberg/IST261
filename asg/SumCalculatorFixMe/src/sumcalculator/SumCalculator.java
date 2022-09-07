@@ -1,14 +1,11 @@
-package investmentviewermvcfixme;
+package sumcalculator;
 
-/**
- * Based on program in Big Java: Late Objects by Cay Horstmann
- */
-public class InvestmentApp {
+public class SumCalculator {
 
     public static void main(String[] args) {
         //https://docs.oracle.com/javase/tutorial/uiswing/concurrency/initial.html
         javax.swing.SwingUtilities.invokeLater(() -> {
-            InvestmentCntl cntl = new InvestmentCntl();
+            Controller cntl = new Controller();
             cntl.showView();
         });
     }
