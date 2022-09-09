@@ -55,8 +55,19 @@ public final class View extends JFrame {
 
     private void createButton() {
         button = new JButton("Compute Sum");
+        
+        //  use lambda to add button logic
         button.addActionListener((ActionEvent e) ->{
-            validateInput(textField.getText());
+            //  get input from text field
+            String input = textField.getText();
+            
+            //  utilize controller method to check input, if there's an error display it, if not, compute sum
+            String err = cntl.validateInput(input);
+            if (!err.equals("")){
+                javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(), err);
+            } else {
+                cntl.computeSum(input);
+            }
         });
     }
 
@@ -73,42 +84,4 @@ public final class View extends JFrame {
     public void displaySelf() {
         this.setVisible(true);
     }
-
-    private void validateInput(String input) {
-        //  matches only 6 ints seperated by whitespace, no further validation needed if it doesn't pass this check
-        if (input.matches("((\\d){1,2}\\s+){6}")) {
-            //  split the string into an array of ints, perform further validation
-            String[] splitInput = input.split("\\s+");
-            List<Integer> parsedInput = new ArrayList<>();
-            for (String entry : splitInput){
-                parsedInput.add(Integer.parseInt(entry));
-            }
-            
-            //  error message string
-            String errorMessage = "";
-            
-            //  check to ensure entered ints are within range
-           if (!cntl.withinRange(parsedInput)){
-               errorMessage.concat("One or more of the input integers is out of bounds (less than 1 or greater than 60)");
-           }
-            
-            //  check for duplicates
-            if (cntl.containsDuplicates(parsedInput)){
-                if (!errorMessage.equals("")){
-                    errorMessage.concat("; ");
-                }
-                errorMessage.concat("The input has integer values that are repeated");
-            }
-            
-            if (!errorMessage.equals("")){
-                javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(), errorMessage);
-            textField.requestFocus();
-            }
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(),
-                    "The input does not contain exactly just six one- or two-digit integers, separated by one or more spaces");
-            textField.requestFocus();
-        }
-    }
-
 }
