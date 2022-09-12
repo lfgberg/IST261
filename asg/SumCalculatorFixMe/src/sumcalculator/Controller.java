@@ -67,7 +67,7 @@ public class Controller {
      * @return 
      */
     private boolean isInFormat(String input){
-        if (input.matches("((\\d){1,2}\\s+){5}((\\d){1,2})")){
+        if (input.matches("((\\d){1,2}\\s+){5}((\\d\\s*){1,2})")){
             return true;
         } else {
             return false;
@@ -79,7 +79,7 @@ public class Controller {
      */
     public String validateInput(String input){
         //  If the first check is failed, no need to continue
-        if (this.isInFormat(input)){
+        if (!this.isInFormat(input)){
             return "the input is not exactly just six different one- or two-digit integers separated by one or more spaces";
         }
         

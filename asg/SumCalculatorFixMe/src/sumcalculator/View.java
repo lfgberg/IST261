@@ -1,8 +1,6 @@
 package sumcalculator;
 
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -66,7 +64,7 @@ public final class View extends JFrame {
             if (!err.equals("")){
                 javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(), err);
             } else {
-                cntl.computeSum(input);
+                resultArea.append(String.valueOf(cntl.computeSum(input) + "\n"));
             }
         });
     }
