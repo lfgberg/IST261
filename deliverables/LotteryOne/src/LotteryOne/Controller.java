@@ -1,4 +1,4 @@
-package sumcalculator;
+package LotteryOne;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,16 +19,51 @@ public class Controller {
         view.displaySelf();
     }
     
-    public int computeSum(String input){
-        //  split the string into an array of ints, perform further validation
-        String[] splitInput = input.split("\\s+");
-         List<Integer> parsedInput = new ArrayList<>();
-         for (String entry : splitInput){
-             parsedInput.add(Integer.parseInt(entry));
-         }
-        
-        return model.computeSum(parsedInput);
+    public List<Integer> getResults(){
+        return model.getResults();
     }
+    
+    /**
+     * Finds out if the user entered any winning numbers
+     * @return a List of the winning numbers
+     */
+    public List<Integer> drawLotto(){
+        //  draw a new set of numbers to work with
+        this.drawResults();
+        
+        List<Integer> winners = new ArrayList<>();
+        
+        //  loop through the drawn numbers, add any winners
+        for (Integer entry : model.getResults()){
+            if (model.getInput().contains(entry)){
+                winners.add(entry);
+            }
+        }
+        
+        return winners;
+    }
+    
+    /**
+     * Draws 6 numbers to be the lottery results
+     */
+    private void drawResults(){
+        List<Integer> results = model.getResults();
+        results.clear();
+        
+        //  draw nums until we reach 6
+        while (results.size() != 6){
+            
+            //  rand int 1-60
+            int rand = (int)(Math.random()*60+1);
+            
+            //  add if not present
+            if (!results.contains(rand)){
+                results.add(rand);
+            }
+        }
+    }
+    
+    
     
     /**
      * Determines if a List of integers contains duplicates
@@ -99,6 +134,9 @@ public class Controller {
             return "the input contains an integer that is out of bounds.";
         } else if (hasDupes){
             return "the input contains duplicate integers.";
-        } else return "";
+        } else {
+            model.setInput(parsedInput);
+            return "";
+        }
     }
 }

@@ -1,6 +1,6 @@
-package sumcalculator;
+package LotteryOne;
 
-public class SumCalculator {
+public class LotteryOne {
 
     public static void main(String[] args) {
         //https://docs.oracle.com/javase/tutorial/uiswing/concurrency/initial.html

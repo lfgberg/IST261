@@ -1,20 +1,26 @@
-package sumcalculator;
+package LotteryOne;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Model {
 
-    private int sum;
+    private List<Integer> input, results;
  
     public Model() {
-        sum = 0;
+        this.input = new ArrayList<>();
+        this.results = new ArrayList<>();
     }
-
-    public int computeSum(List<Integer> input) {
-        for (int entry : input){
-            sum = sum + entry;
-        }
-        return sum;
+    
+    public List<Integer> getResults(){
+        return this.results;
     }
-
+    
+    public List<Integer> getInput(){
+        return this.input;
+    }
+    
+    public void setInput(List<Integer> input){
+        this.input = input;
+    }
 }

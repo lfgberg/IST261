@@ -1,6 +1,7 @@
-package sumcalculator;
+package LotteryOne;
 
 import java.awt.event.ActionEvent;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -52,19 +53,27 @@ public final class View extends JFrame {
     }
 
     private void createButton() {
-        button = new JButton("Compute Sum");
+        button = new JButton("I'm Feeling Lucky");
         
         //  use lambda to add button logic
         button.addActionListener((ActionEvent e) ->{
             //  get input from text field
             String input = textField.getText();
             
-            //  utilize controller method to check input, if there's an error display it, if not, compute sum
+            //  clear the result field
+            resultArea.setText("");
+            
+            //  utilize controller method to check input, if there's an error display it, if not, run drawing
             String err = cntl.validateInput(input);
             if (!err.equals("")){
                 javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(), err);
             } else {
-                resultArea.append(String.valueOf(cntl.computeSum(input) + "\n"));
+                //  run the drawing
+                List<Integer> winners = cntl.drawLotto();
+                
+                //  display the info to the user
+                resultArea.append("Your Lucky Numbers: " + input + "\nResults From Drawing: "
+                + cntl.getResults() + "\nYour Winning Numbers: " + winners);
             }
         });
     }
