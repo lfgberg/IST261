@@ -18,7 +18,7 @@ public class ListElementChooser {
      */
     public static void main(String[] args) {
         ArrayList<Coin> coins = genCoins();
-        Chooser chooser = new Chooser(coins);
+        Chooser<Coin> chooser = new Chooser<>(coins);
         
         for (int i = 0; i < 10; i++){
             System.out.println(chooser.choose());
@@ -26,7 +26,7 @@ public class ListElementChooser {
     }
     
     private static ArrayList<Coin> genCoins(){
-        return new ArrayList(List.of(new Coin("quarter", .25), new Coin("penny", .01), new Coin("dollar", 1.0),
+        return new ArrayList<>(List.of(new Coin("quarter", .25), new Coin("penny", .01), new Coin("dollar", 1.0),
                 new Coin("nickel", .05), new Coin("dime", .10), new Coin("half dollar", .50)));
     }
     

@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
@@ -20,12 +21,19 @@ public class Chooser<T> {
         this.choiceList = new HashSet<>(choices);
     }
     
+
     /*
-    I don't really understand what's expected here becuase the original choice method doesn't use a for loop
+        The only way that I could think to use an iterator, is to gen a random number,
+        and then iterate that many times. It didn't feel efficient to me but it does the job.
     */
     public T choose(){
-        // this isnt random.
-        Iterator value = choiceList.iterator();
-        return (T) value.next();
+         Iterator<T> iter = choiceList.iterator();
+         int rnd = ThreadLocalRandom.current().nextInt(choiceList.size() - 1);
+        
+         for (int i = 0; i < rnd; i++){
+             iter.next();
+         }
+         
+         return iter.next();
     }
 }
