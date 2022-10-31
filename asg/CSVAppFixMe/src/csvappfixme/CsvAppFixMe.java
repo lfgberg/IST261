@@ -22,23 +22,26 @@ public class CsvAppFixMe {
 
     public static void main(String[] args) {
         List<GeographicRegion> regionList = populateList("RegionsAndAreas.csv");
-        //Chooser<GeographicRegion> chooser = new Chooser<>(regionList);
+        Chooser<GeographicRegion> chooser = new Chooser<>(regionList);
         
-        //for (int i = 0; i < 10; i++){
-        //    System.out.println(chooser.choose());
-        //}
+        for (int i = 0; i < 10; i++){
+            System.out.println(chooser.choose());
+        }
     }
 
     public static List<GeographicRegion> populateList(String fileName){
+        Map<String, String> values = null ;
         try {
-            Map<String, String> values = new CSVReaderHeaderAware(new FileReader(fileName)).readMap();
+            values = new CSVReaderHeaderAware(new FileReader(fileName)).readMap();
         } catch (FileNotFoundException ex) {
-            System.out.println(ex.getMessage());
-        } catch (IOException | CsvValidationException ex ){
-            System.out.println(ex.getMessage());
+            Logger.getLogger(CsvAppFixMe.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | CsvValidationException ex) {
+            Logger.getLogger(CsvAppFixMe.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
-        return new ArrayList<>();       
+        
+        List<GeographicRegion> result = new ArrayList<>();
+           
+        return result;      
     }
 
 }

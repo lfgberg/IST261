@@ -1,7 +1,7 @@
 package csvappfixme;
 
 public class GeographicRegion {
-    private String country, area;
+    private final String country, area;
 
     public GeographicRegion(String country, String area){
         this.country = country;
